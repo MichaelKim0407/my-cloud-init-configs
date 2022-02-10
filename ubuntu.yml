@@ -81,6 +81,11 @@ packages:
   - containerd.io
 
 write_files:
+  - owner: root:root
+    path: /etc/cron.d/apt-cleanup
+    content: |
+      0 0 * * 0 . /etc/environment; apt-get autoremove -y; apt-get autoclean -y
+
   - path: "/etc/bash.bashrc"
     content: |
       source /etc/bash.bashrc.append

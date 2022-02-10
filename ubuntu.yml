@@ -79,6 +79,7 @@ packages:
   - docker-ce
   - docker-ce-cli
   - containerd.io
+  - ddclient
 
 write_files:
   - owner: root:root

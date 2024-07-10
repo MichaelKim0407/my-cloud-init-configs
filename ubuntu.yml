@@ -80,6 +80,7 @@ packages:
   - docker-ce-cli
   - containerd.io
   - autoconf
+  - unzip
 
 write_files:
   - owner: root:root
@@ -150,3 +151,7 @@ runcmd:
   - "cp sample-etc_systemd.service /etc/systemd/system/ddclient.service"
   - "systemctl enable ddclient.service"
   - "systemctl start ddclient.service"
+  - "cd /root"
+  - "curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip"
+  - "unzip awscliv2.zip"
+  - "./aws/install"

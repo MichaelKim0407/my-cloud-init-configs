@@ -79,7 +79,7 @@ packages:
   - docker-ce
   - docker-ce-cli
   - containerd.io
-  - ddclient
+  - autoconf
 
 write_files:
   - owner: root:root
@@ -139,3 +139,14 @@ runcmd:
   - "cd /etc"
   - "ln -s /usr/local/lib/ubuntu-linux-util/etc/vim/vimrc.local ./vim/"
   - "ln -s /usr/local/lib/ubuntu-linux-util/etc/bash.* ./"
+  - "cd /root"
+  - "wget -O ddclient-3.11.2.tar.gz https://github.com/ddclient/ddclient/archive/refs/tags/v3.11.2.tar.gz"
+  - "tar zxf ddclient-3.11.2.tar.gz"
+  - "cd ddclient-3.11.2"
+  - "./autogen"
+  - "./configure --prefix=/usr --sysconfdir=/etc/ddclient --localstatedir=/var"
+  - "make"
+  - "make install"
+  - "cp sample-etc_systemd.service /etc/systemd/system/ddclient.service"
+  - "systemctl enable ddclient.service"
+  - "systemctl start ddclient.service"
